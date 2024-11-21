@@ -1,6 +1,7 @@
 import csv
+import plotext as plt
 
-# Load the CSV data
+# Step 1: Load the CSV data
 data = []
 with open("models.csv", "r") as csvfile:  # Replace with your file name
     reader = csv.DictReader(csvfile)
@@ -13,7 +14,7 @@ with open("models.csv", "r") as csvfile:  # Replace with your file name
         row["disk"] = int(row["disk"])
         data.append(row)
 
-# Compute performance and value scores
+# Step 2: Compute performance and value scores
 for row in data:
     performance_score = (
         0.4 * row["cpu"] +
@@ -24,16 +25,17 @@ for row in data:
     row["performance_score"] = performance_score
     row["value_score"] = performance_score / row["base_price"]
 
-# Find the best value model
+# Step 3: Extract models and value scores for plotting
+models = [row["model"] for row in data]
+value_scores = [row["value_score"] for row in data]
+
+# Step 4: Plot the data using plotext
+plt.bar(models, value_scores)
+plt.title("Performance per Dollar")
+plt.xlabel("Model")
+plt.ylabel("Value Score")
+plt.show()
+
+# Step 5: Display the best value model
 best_value_model = max(data, key=lambda x: x["value_score"])
-
-# Display results
-print("Performance and Value Scores:")
-for row in data:
-    print(
-        f"Model: {row['model']}, Performance Score: {row['performance_score']:.2f}, "
-        f"Value Score: {row['value_score']:.5f}"
-    )
-
-print("\nBest Value Model:", best_value_model["model"])
-
+print(f"\nBest Value Model: {best_value_model['model']}")
