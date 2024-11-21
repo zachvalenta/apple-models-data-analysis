@@ -1,0 +1,6 @@
+model,base_price,cpu,gpu,mem,disk
+air,1000,8,8,16,250
+macbook,1600,10,10,16,500
+imac,1300,8,8,16,250
+mini,600,10,10,16,250
+studio,2000,12,30,32,500
