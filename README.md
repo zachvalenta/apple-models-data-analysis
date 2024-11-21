@@ -9,3 +9,7 @@ simple repo to learn two things:
 
 https://docs.gpt4all.io/gpt4all_help/faq.html#is-there-a-command-line-interface-cli
 
+# todo
+
+* scrape status from buying guide
+

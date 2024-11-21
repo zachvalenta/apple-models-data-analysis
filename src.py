@@ -27,13 +27,19 @@ for row in data:
 
 # Step 3: Extract models and value scores for plotting
 models = [row["model"] for row in data]
-value_scores = [row["value_score"] for row in data]
+performance_scores = [round(row["performance_score"], 2) for row in data]
+value_scores_percentage = [round(row["value_score"] * 100, 2) for row in data]  # Scaled to percentage for better display
 
 # Step 4: Plot the data using plotext
-plt.bar(models, value_scores)
-plt.title("Performance per Dollar")
-plt.xlabel("Model")
-plt.ylabel("Value Score")
+plt.simple_multiple_bar(
+    models,
+    [performance_scores, value_scores_percentage],
+    width=60,
+    labels=["Performance Score", "Value Score (%)"],
+    title="Performance vs Value of Apple Models"
+)
+plt.xlabel("Apple Models")
+plt.ylabel("Scores")
 plt.show()
 
 # Step 5: Display the best value model
